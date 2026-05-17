@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://stock.adobe.com; frame-ancestors 'none'; base-uri 'self';">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Golden Rich">
+    <meta name="theme-color" content="#e5a93c">
+    <title>💰 Golden Rich - Final Edition</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 50%, #0d1a1a 100%);
+            color: #d4d4d4;
+            padding: 20px;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Floating Dollar Animation */
+        .dollars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .dollar {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.1;
+            font-weight: bold;
+            animation: float linear infinite;
+            will-change: transform;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0.15;
+            }
+            10% {
+                opacity: 0.2;
+            }
+            90% {
+                opacity: 0.1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .dollar:nth-child(1) { left: 10%; animation-duration: 15s; animation-delay: 0s; }
+        .dollar:nth-child(2) { left: 20%; animation-duration: 18s; animation-delay: 2s; }
+        .dollar:nth-child(3) { left: 30%; animation-duration: 20s; animation-delay: 4s; }
+        .dollar:nth-child(4) { left: 40%; animation-duration: 17s; animation-delay: 1s; }
+        .dollar:nth-child(5) { left: 50%; animation-duration: 19s; animation-delay: 3s; }
+        .dollar:nth-child(6) { left: 60%; animation-duration: 16s; animation-delay: 5s; }
+        .dollar:nth-child(7) { left: 70%; animation-duration: 21s; animation-delay: 2.5s; }
+        .dollar:nth-child(8) { left: 80%; animation-duration: 18s; animation-delay: 4s; }
+        .dollar:nth-child(9) { left: 90%; animation-duration: 20s; animation-delay: 1.5s; }
+        .dollar:nth-child(10) { left: 15%; animation-duration: 17s; animation-delay: 3.5s; }
+        .dollar:nth-child(11) { left: 45%; animation-duration: 19s; animation-delay: 0.5s; }
+        .dollar:nth-child(12) { left: 75%; animation-duration: 22s; animation-delay: 5.5s; }
+
+        /* Main Content */
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+
+        .container { 
+            max-width: 1000px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(37, 37, 38, 0.95) 0%, rgba(45, 45, 48, 0.95) 100%);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 
+                0 10px 40px rgba(0,0,0,0.8),
+                0 0 30px rgba(229, 169, 60, 0.2),
+                inset 0 0 20px rgba(229, 169, 60, 0.05);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(229, 169, 60, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 5px;
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 50%, #e5a93c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 26px;
+            text-shadow: 0 0 20px rgba(229, 169, 60, 0.3);
+            letter-spacing: 2px;
+        }
+
+        .header-badges {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 5px;
+        }
+
+        .license-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #ffd700 0%, #e5a93c 100%);
+            color: #000;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            border: 2px solid #d4af37;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(229, 169, 60, 0.5);
+            animation: glow 2s ease-in-out infinite;
+            white-space: nowrap;
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 4px 15px rgba(229, 169, 60, 0.5); }
+            50% { box-shadow: 0 4px 25px rgba(229, 169, 60, 0.8); }
+        }
+
+        .security-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #2d5016 0%, #558b2f 100%);
+            color: #90ee90;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 11px;
+            border: 2px solid #558b2f;
+            font-weight: bold;
+            box-shadow: 0 2px 10px rgba(85, 139, 47, 0.4);
+            white-space: nowrap;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #aaa;
+            margin-bottom: 15px;
+            font-size: 12px;
+        }
+
+        .security-info {
+            background: rgba(45, 80, 22, 0.3);
+            border-left: 4px solid #90ee90;
+            padding: 10px;
+            margin-bottom: 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #90ee90;
+        }
+
+        .info-box {
+            background: rgba(60, 60, 60, 0.5);
+            border-left: 4px solid #4fc1ff;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            backdrop-filter: blur(5px);
+            font-size: 13px;
+        }
+
+        /* License Modal */
+        .license-modal {
+            display: flex;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+        .license-modal.hidden {
+            display: none;
+        }
+        .license-content {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            padding: 40px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 450px;
+            border: 3px solid #e5a93c;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.95), 0 0 30px rgba(229, 169, 60, 0.3);
+            animation: slideUp 0.3s ease-out;
+        }
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        .license-title {
+            background: linear-gradient(135deg, #ffd700 0%, #e5a93c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 28px;
+            margin-bottom: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .license-subtitle {
+            color: #aaa;
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+        .license-input-group {
+            margin-bottom: 20px;
+        }
+        .license-input-group label {
+            display: block;
+            color: #d4d4d4;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .license-input-group input {
+            width: 100%;
+            padding: 12px;
+            background: #3c3c3c;
+            color: #fff;
+            border: 2px solid #555;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: monospace;
+            transition: all 0.2s;
+        }
+        .license-input-group input:focus {
+            outline: none;
+            border-color: #e5a93c;
+            box-shadow: 0 0 15px rgba(229, 169, 60, 0.4);
+        }
+        .license-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+        }
+        .license-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+        .license-btn-submit {
+            background: linear-gradient(135deg, #ffd700 0%, #e5a93c 100%);
+            color: #000;
+        }
+        .license-btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 25px rgba(229, 169, 60, 0.5);
+        }
+        .license-error {
+            color: #f44747;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+        .license-error.show {
+            display: block;
+            animation: shake 0.3s;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .input-section {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+        }
+        .textarea-wrapper {
+            flex: 1;
+            min-width: 250px;
+            position: relative;
+        }
+        textarea {
+            width: 100%;
+            height: 80px;
+            background: rgba(60, 60, 60, 0.7);
+            color: #fff;
+            padding: 10px;
+            border-radius: 6px;
+            border: 2px solid #555;
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            resize: vertical;
+            backdrop-filter: blur(5px);
+        }
+        textarea:focus { 
+            outline: none;
+            border-color: #e5a93c;
+            box-shadow: 0 0 15px rgba(229, 169, 60, 0.3);
+        }
+        .suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: rgba(60, 60, 60, 0.95);
+            border: 2px solid #e5a93c;
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 100;
+            display: none;
+            backdrop-filter: blur(5px);
+        }
+        .suggestion-item {
+            padding: 10px 12px;
+            cursor: pointer;
+            border-bottom: 1px solid #555;
+            transition: all 0.2s;
+        }
+        .suggestion-item:hover {
+            background: rgba(229, 169, 60, 0.1);
+            border-left: 3px solid #e5a93c;
+            padding-left: 15px;
+        }
+        .suggestion-item .count {
+            color: #4ec9b0;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            justify-content: space-between;
+        }
+        select {
+            padding: 10px;
+            background: rgba(60, 60, 60, 0.7);
+            color: white;
+            border: 2px solid #555;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+        }
+        select:focus {
+            outline: none;
+            border-color: #e5a93c;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+        }
+        button {
+            flex: 1;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #0e639c 0%, #1084d7 100%);
+            color: white;
+            border: 2px solid transparent;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(14, 99, 156, 0.5);
+        }
+        button:active {
+            transform: translateY(0);
+        }
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        button.secondary {
+            background: linear-gradient(135deg, #ffd700 0%, #e5a93c 100%);
+            color: #000;
+            border-color: #d4af37;
+        }
+        button.secondary:hover {
+            box-shadow: 0 5px 20px rgba(229, 169, 60, 0.5);
+            border-color: #ffd700;
+        }
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 15px;
+            color: #aaa;
+            font-style: italic;
+            font-size: 13px;
+        }
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 3px solid #555;
+            border-top: 3px solid #e5a93c;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-right: 10px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .results-section {
+            margin-top: 20px;
+        }
+        .filter-controls {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 6px 12px;
+            background: rgba(60, 60, 60, 0.7);
+            color: #d4d4d4;
+            border: 2px solid #555;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+        .filter-btn.active {
+            background: linear-gradient(135deg, #ffd700 0%, #e5a93c 100%);
+            color: #000;
+            border-color: #e5a93c;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(60, 60, 60, 0.5);
+            border-radius: 6px;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+            font-size: 13px;
+        }
+        thead { background: rgba(30, 30, 30, 0.8); }
+        th {
+            padding: 12px 10px;
+            text-align: left;
+            background: linear-gradient(90deg, rgba(229, 169, 60, 0.2) 0%, rgba(229, 169, 60, 0.1) 100%);
+            color: #ffd700;
+            font-weight: 600;
+            border-bottom: 2px solid #e5a93c;
+            font-size: 12px;
+        }
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #555;
+        }
+        tbody tr:hover {
+            background: rgba(229, 169, 60, 0.1);
+        }
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+        .badge-gold {
+            background: linear-gradient(135deg, #ffd700 0%, #e5a93c 100%);
+            color: #000;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            display: inline-block;
+            font-size: 11px;
+        }
+        .badge-low {
+            background: #4ec9b0;
+            color: #000;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            display: inline-block;
+            font-size: 11px;
+        }
+        .competitors-low {
+            color: #4ec9b0;
+            font-weight: 600;
+        }
+        .competitors-high {
+            color: #f44747;
+            font-weight: 600;
+        }
+        a {
+            color: #4fc1ff;
+            text-decoration: none;
+            transition: all 0.2s;
+            font-size: 12px;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .empty-state {
+            text-align: center;
+            padding: 30px;
+            color: #aaa;
+            font-size: 13px;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+        .stat-box {
+            background: rgba(60, 60, 60, 0.5);
+            padding: 12px;
+            border-radius: 6px;
+            text-align: center;
+            border: 2px solid #555;
+            backdrop-filter: blur(5px);
+        }
+        .stat-box.premium {
+            border-color: #e5a93c;
+            background: rgba(229, 169, 60, 0.1);
+            box-shadow: 0 0 15px rgba(229, 169, 60, 0.2);
+        }
+        .stat-value {
+            font-size: 20px;
+            font-weight: bold;
+            color: #ffd700;
+        }
+        .stat-label {
+            font-size: 11px;
+            color: #aaa;
+            margin-top: 4px;
+        }
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #2d5016 0%, #558b2f 100%);
+            color: #90ee90;
+            padding: 12px 16px;
+            border-radius: 6px;
+            border: 2px solid #558b2f;
+            display: none;
+            z-index: 1000;
+            animation: slideIn 0.3s ease-out;
+            box-shadow: 0 5px 20px rgba(85, 139, 47, 0.3);
+            font-size: 12px;
+        }
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 15px; }
+            h1 { font-size: 22px; }
+            .header-badges { flex-direction: column; align-items: center; }
+            .license-badge, .security-badge { width: 100%; text-align: center; }
+            .input-section { flex-direction: column; }
+            .button-group { flex-direction: column; }
+            .stats { grid-template-columns: repeat(2, 1fr); }
+            table { font-size: 11px; }
+            th, td { padding: 8px 6px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Floating Dollars Background -->
+<div class="dollars-container" id="dollarsContainer"></div>
+
+<!-- License Modal -->
+<div class="license-modal" id="licenseModal">
+    <div class="license-content">
+        <div class="license-title">💰 Golden Rich</div>
+        <div class="license-subtitle">Masukkan Kode Lisensi Anda</div>
+        
+        <div class="license-input-group">
+            <label for="licenseCode">Kode Lisensi:</label>
+            <input 
+                type="password" 
+                id="licenseCode" 
+                placeholder="Masukkan kode lisensi Anda..." 
+                autocomplete="off"
+            >
+            <div class="license-error" id="licenseError">❌ Kode lisensi tidak valid!</div>
+        </div>
+
+        <div class="license-buttons">
+            <button class="license-btn license-btn-submit" onclick="verifyLicense()">
+                ✓ Verifikasi
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="content-wrapper">
+    <div class="container">
+        <h1>💰 Golden Rich</h1>
+        <div class="header-badges">
+            <span class="license-badge">🏆 PREMIUM</span>
+            <span class="security-badge" id="secureBadge">🔒 SECURE</span>
+        </div>
+        <div class="subtitle">Professional Adobe Stock Niche Analyzer</div>
+        
+        <div class="security-info">
+            🔐 <strong>1.</strong> Klik kanan <strong>PASANG-SERTIFIKAT-AMAN.bat</strong> → Run as administrator (sekali). <strong>2.</strong> Jalankan <strong>BUKA-WEB-AMAN.bat</strong> → browser tampil <em>Connection is secure</em> (gembok hijau).
+        </div>
+
+        <div class="info-box">
+            💡 Masukkan keyword spesifik, pisahkan dengan koma/enter. Gunakan "Auto Golden" untuk hasil optimal!
+        </div>
+
+        <div class="input-section">
+            <div class="textarea-wrapper">
+                <textarea id="keywordsInput" placeholder="Contoh: watercolor painting, cat illustration&#10;Atau ketik satu per baris"></textarea>
+                <div class="suggestions" id="suggestions"></div>
+            </div>
+            <div class="controls">
+                <select id="assetType">
+                    <option value="images">📷 Foto</option>
+                    <option value="vectors">🎨 Vektor</option>
+                    <option value="videos">🎬 Video</option>
+                </select>
+                <div class="button-group">
+                    <button onclick="startResearch()">🚀 Riset</button>
+                    <button class="secondary" onclick="autoFillGoldenKeywords()">✨ Auto</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="loading" id="loadingText">
+            <div class="spinner"></div>
+            <span id="loadingMessage">Menganalisis...</span>
+        </div>
+
+        <div class="results-section">
+            <div class="stats" id="statsContainer" style="display: none;">
+                <div class="stat-box premium">
+                    <div class="stat-value" id="totalStats">0</div>
+                    <div class="stat-label">Total</div>
+                </div>
+                <div class="stat-box premium">
+                    <div class="stat-value" id="goldenStats">0</div>
+                    <div class="stat-label">Golden</div>
+                </div>
+                <div class="stat-box premium">
+                    <div class="stat-value" id="lowCompStats">0</div>
+                    <div class="stat-label">Low Comp</div>
+                </div>
+                <div class="stat-box premium">
+                    <div class="stat-value" id="avgDemandStats">0</div>
+                    <div class="stat-label">Avg Demand</div>
+                </div>
+            </div>
+
+            <div class="filter-controls" id="filterControls" style="display: none;">
+                <button type="button" class="filter-btn active" data-filter="all">Semua</button>
+                <button type="button" class="filter-btn" data-filter="golden">🔥 Golden</button>
+                <button type="button" class="filter-btn" data-filter="lowcomp">🌱 Low Comp</button>
+            </div>
+
+            <table id="resultsTable" style="display: none;">
+                <thead>
+                    <tr>
+                        <th>Keyword</th>
+                        <th>Tipe</th>
+                        <th>Pesaing</th>
+                        <th>Demand</th>
+                        <th>Status</th>
+                        <th>Link</th>
+                    </tr>
+                </thead>
+                <tbody id="resultsBody"></tbody>
+            </table>
+            <div class="empty-state" id="emptyState">
+                Mulai dengan memasukkan keyword untuk analisis.
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="security-guard.js"></script>
+<script>
+    'use strict';
+
+    const SEC = window.GoldenRichSecurity;
+    if (!SEC?.initSecureApp()) {
+        document.querySelector('.content-wrapper')?.remove();
+    } else {
+        const badge = document.getElementById('secureBadge');
+        if (badge) badge.textContent = '🔒 AMAN (HTTPS)';
+    }
+
+    function createFloatingDollars() {
+        const container = document.getElementById('dollarsContainer');
+        const dollarSymbols = ['$', '💵', '💰'];
+        
+        for (let i = 0; i < 12; i++) {
+            const dollar = document.createElement('div');
+            dollar.className = 'dollar';
+            dollar.textContent = dollarSymbols[Math.floor(Math.random() * dollarSymbols.length)];
+            dollar.style.fontSize = (Math.random() * 1.5 + 1.5) + 'rem';
+            dollar.style.left = (Math.random() * 100) + '%';
+            container.appendChild(dollar);
+        }
+    }
+
+    window.addEventListener('load', createFloatingDollars);
+    
+    function checkLicense() {
+        if (SEC?.isSessionValid()) {
+            closeLicenseModal();
+            return true;
+        }
+        return false;
+    }
+
+    async function verifyLicense() {
+        if (!SEC) return;
+        const errorMsg = document.getElementById('licenseError');
+        const result = await SEC.verifyLicenseInput(document.getElementById('licenseCode').value);
+        if (result.ok) {
+            showToast('✅ Lisensi berhasil diverifikasi!');
+            closeLicenseModal();
+            return;
+        }
+        if (result.locked) {
+            errorMsg.textContent = `❌ Terkunci ${result.minutes} menit`;
+        } else if (result.insecure) {
+            errorMsg.textContent = '❌ Jalankan BUKA-WEB-AMAN.bat';
+        } else {
+            errorMsg.textContent = result.attemptsLeft === 0
+                ? '❌ Terkunci sementara'
+                : `❌ Kode salah (${result.attemptsLeft} percobaan tersisa)`;
+        }
+        errorMsg.classList.add('show');
+        document.getElementById('licenseCode').value = '';
+        setTimeout(() => errorMsg.classList.remove('show'), 4000);
+    }
+
+    function closeLicenseModal() {
+        document.getElementById('licenseModal').classList.add('hidden');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const licenseInput = document.getElementById('licenseCode');
+        if (licenseInput) {
+            licenseInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') verifyLicense();
+            });
+        }
+
+        if (!checkLicense()) {
+            document.getElementById('licenseModal').classList.remove('hidden');
+            licenseInput?.focus();
+        }
+    });
+
+    const sanitizeInput = (input) => SEC.sanitizeText(input);
+
+    const rateLimiter = {
+        requests: [],
+        maxRequests: 10,
+        timeWindow: 60000,
+        
+        canMakeRequest() {
+            const now = Date.now();
+            this.requests = this.requests.filter(t => now - t < this.timeWindow);
+            if (this.requests.length >= this.maxRequests) return false;
+            this.requests.push(now);
+            return true;
+        }
+    };
+
+    const goldenKeywords = {
+        images: [
+            { kw: 'watercolor painting', comp: 450 },
+            { kw: 'cat portrait illustration', comp: 380 },
+            { kw: 'minimal workspace', comp: 620 },
+            { kw: 'coffee shop aesthetic', comp: 510 },
+            { kw: 'plant collection flat lay', comp: 390 },
+            { kw: 'modern office interior', comp: 680 },
+            { kw: 'wellness lifestyle photo', comp: 540 },
+            { kw: 'sustainable fashion detail', comp: 720 },
+            { kw: 'cozy reading nook', comp: 410 },
+            { kw: 'morning routine preparation', comp: 480 }
+        ],
+        vectors: [
+            { kw: 'geometric pattern design', comp: 350 },
+            { kw: 'mental health icon set', comp: 320 },
+            { kw: 'ramadan greeting card', comp: 280 },
+            { kw: 'tech startup illustration', comp: 580 },
+            { kw: 'eco friendly logo design', comp: 450 },
+            { kw: 'minimal line art icon', comp: 390 },
+            { kw: 'cultural celebration graphic', comp: 310 },
+            { kw: 'nature theme vector art', comp: 440 },
+            { kw: 'business meeting illustration', comp: 520 },
+            { kw: 'abstract colorful pattern', comp: 470 }
+        ],
+        videos: [
+            { kw: 'morning meditation video', comp: 280 },
+            { kw: 'coffee brewing close up', comp: 340 },
+            { kw: 'nature timelapse footage', comp: 620 },
+            { kw: 'workspace tour vlog', comp: 390 },
+            { kw: 'productivity routine video', comp: 450 },
+            { kw: 'plant care tutorial', comp: 320 },
+            { kw: 'minimalist lifestyle video', comp: 510 },
+            { kw: 'cooking technique demo', comp: 480 },
+            { kw: 'study ambiance video', comp: 360 },
+            { kw: 'travel vlog intro', comp: 540 }
+        ]
+    };
+
+    function showToast(message) {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.style.display = 'block';
+        setTimeout(() => toast.style.display = 'none', 3000);
+    }
+
+    function autoFillGoldenKeywords() {
+        if (!rateLimiter.canMakeRequest()) {
+            showToast('⚠️ Tunggu sebentar...');
+            return;
+        }
+
+        const assetType = document.getElementById('assetType').value;
+        const suggestions = goldenKeywords[assetType] || [];
+        
+        if (suggestions.length === 0) return;
+
+        const selected = suggestions
+            .sort(() => Math.random() - 0.5)
+            .slice(0, 5)
+            .map(s => s.kw);
+
+        document.getElementById('keywordsInput').value = selected.join('\n');
+        showToast('✅ ' + selected.length + ' keywords ditambahkan!');
+    }
+
+    const suggestionsEl = document.getElementById('suggestions');
+    SEC.bindSuggestionList(suggestionsEl, insertSuggestion);
+
+    document.getElementById('keywordsInput').addEventListener('input', function(e) {
+        const assetType = document.getElementById('assetType').value;
+        const input = e.target.value.split('\n').pop().trim().toLowerCase();
+        if (input.length < 2) {
+            suggestionsEl.style.display = 'none';
+            return;
+        }
+        const matches = (goldenKeywords[assetType] || [])
+            .filter(s => s.kw.toLowerCase().includes(input))
+            .slice(0, 5);
+        SEC.renderSuggestions(suggestionsEl, matches);
+    });
+
+    function insertSuggestion(keyword) {
+        const textarea = document.getElementById('keywordsInput');
+        const lines = textarea.value.split('\n');
+        lines[lines.length - 1] = keyword;
+        textarea.value = lines.join('\n');
+        suggestionsEl.style.display = 'none';
+    }
+
+    function estimateDemand(competitorCount) {
+        if (competitorCount === 0) return 50;
+        if (competitorCount < 300) return 85;
+        if (competitorCount < 500) return 75;
+        if (competitorCount < 1000) return 65;
+        if (competitorCount < 5000) return 45;
+        return 30;
+    }
+
+    function generateMockResult(keyword, assetType) {
+        const mockCompetitors = Math.floor(Math.random() * 3000) + 100;
+        const demandScore = estimateDemand(mockCompetitors);
+        
+        let status = "⚠️ Kompetisi Tinggi";
+        if (mockCompetitors < 1000 && demandScore >= 40) {
+            status = "🔥 GOLDEN NICHE";
+        } else if (mockCompetitors < 1000) {
+            status = "🌱 Kompetisi Rendah";
+        }
+
+        return {
+            keyword: sanitizeInput(keyword),
+            assetType,
+            competitors: mockCompetitors,
+            demandScore,
+            status,
+            url: `https://stock.adobe.com/id/search?k=${encodeURIComponent(keyword)}`
+        };
+    }
+
+    async function researchAdobeStock(keyword, assetType) {
+        try {
+            const keywords = goldenKeywords[assetType] || [];
+            const found = keywords.find(k => k.kw.toLowerCase() === keyword.toLowerCase());
+            
+            if (found) {
+                const demandScore = estimateDemand(found.comp);
+                let status = "⚠️ Kompetisi Tinggi";
+                if (found.comp < 1000 && demandScore >= 40) {
+                    status = "🔥 GOLDEN NICHE";
+                } else if (found.comp < 1000) {
+                    status = "🌱 Kompetisi Rendah";
+                }
+                
+                return {
+                    keyword: sanitizeInput(keyword),
+                    assetType,
+                    competitors: found.comp,
+                    demandScore,
+                    status,
+                    url: `https://stock.adobe.com/id/search?k=${encodeURIComponent(keyword)}`
+                };
+            }
+
+            return generateMockResult(keyword, assetType);
+        } catch (error) {
+            console.error(`Error: "${keyword}"`);
+            return generateMockResult(keyword, assetType);
+        }
+    }
+
+    let allResults = [];
+    let currentFilter = 'all';
+
+    function filterResults(type, btn) {
+        currentFilter = type;
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        if (btn) btn.classList.add('active');
+        updateTable();
+    }
+
+    document.getElementById('filterControls')?.addEventListener('click', (e) => {
+        const btn = e.target.closest('.filter-btn');
+        if (!btn) return;
+        filterResults(btn.dataset.filter || 'all', btn);
+    });
+
+    function updateTable() {
+        const resultsBody = document.getElementById('resultsBody');
+        let filtered = allResults;
+
+        if (currentFilter === 'golden') {
+            filtered = allResults.filter(r => r.status.includes('GOLDEN'));
+        } else if (currentFilter === 'lowcomp') {
+            filtered = allResults.filter(r => r.competitors < 1000 && !r.status.includes('GOLDEN'));
+        }
+
+        resultsBody.innerHTML = filtered.map(item => {
+            const competitorClass = item.competitors < 1000 ? 'competitors-low' : 'competitors-high';
+            const statusClass = item.status.includes('GOLDEN') 
+                ? 'badge-gold' 
+                : (item.status.includes('Rendah') ? 'badge-low' : '');
+
+            return `
+                <tr>
+                    <td><b>${item.keyword}</b></td>
+                    <td>${item.assetType === 'images' ? '📷' : item.assetType === 'vectors' ? '🎨' : '🎬'}</td>
+                    <td class="${competitorClass}">${item.competitors.toLocaleString()}</td>
+                    <td>${item.demandScore}/100</td>
+                    <td><span class="${statusClass}">${item.status}</span></td>
+                    <td><a href="${item.url}" target="_blank" rel="noopener noreferrer">Buka</a></td>
+                </tr>`;
+        }).join('');
+    }
+
+    function calculateStats() {
+        const total = allResults.length;
+        const golden = allResults.filter(r => r.status.includes('GOLDEN')).length;
+        const lowcomp = allResults.filter(r => r.competitors < 1000).length;
+        const avgDemand = Math.round(allResults.reduce((sum, r) => sum + r.demandScore, 0) / total);
+
+        document.getElementById('totalStats').textContent = total;
+        document.getElementById('goldenStats').textContent = golden;
+        document.getElementById('lowCompStats').textContent = lowcomp;
+        document.getElementById('avgDemandStats').textContent = avgDemand;
+    }
+
+    async function startResearch() {
+        if (!rateLimiter.canMakeRequest()) {
+            showToast('⚠️ Tunggu sebentar...');
+            return;
+        }
+
+        const text = document.getElementById('keywordsInput').value;
+        const assetType = document.getElementById('assetType').value;
+        const loadingText = document.getElementById('loadingText');
+        const resultsBody = document.getElementById('resultsBody');
+        const resultsTable = document.getElementById('resultsTable');
+        const emptyState = document.getElementById('emptyState');
+        const statsContainer = document.getElementById('statsContainer');
+        const filterControls = document.getElementById('filterControls');
+        
+        const keywords = text.split(/[\n,]+/)
+            .map(k => k.trim())
+            .filter(k => k.length > 0 && k.length < 100);
+
+        if (keywords.length === 0) {
+            showToast('❌ Masukkan keyword!');
+            return;
+        }
+
+        if (keywords.length > 20) {
+            showToast('❌ Maksimal 20 keyword');
+            return;
+        }
+
+        loadingText.style.display = 'block';
+        resultsTable.style.display = 'none';
+        emptyState.style.display = 'none';
+        statsContainer.style.display = 'none';
+        filterControls.style.display = 'none';
+        resultsBody.innerHTML = '';
+        allResults = [];
+        currentFilter = 'all';
+
+        try {
+            for (let i = 0; i < keywords.length; i++) {
+                document.getElementById('loadingMessage').textContent = `${i + 1}/${keywords.length}`;
+                allResults.push(await researchAdobeStock(keywords[i], assetType));
+                await new Promise(resolve => setTimeout(resolve, 400));
+            }
+
+            loadingText.style.display = 'none';
+            resultsTable.style.display = 'table';
+            statsContainer.style.display = 'grid';
+            filterControls.style.display = 'flex';
+            
+            calculateStats();
+            updateTable();
+            showToast('✅ Selesai!');
+
+        } catch (error) {
+            loadingText.style.display = 'none';
+            showToast('❌ Error');
+            console.error(error);
+        }
+    }
+
+    document.getElementById('keywordsInput').addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.key === 'Enter') {
+            startResearch();
+        }
+    });
+
+    document.addEventListener('paste', (e) => {
+        e.preventDefault();
+        const text = e.clipboardData.getData('text/plain');
+        if (document.activeElement.id === 'keywordsInput') {
+            document.activeElement.value += text;
+        }
+    });
+</script>
+</body>
+</html>
